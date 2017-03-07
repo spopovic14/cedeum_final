@@ -14,6 +14,7 @@
 
         <!-- Custom CSS -->
         <link href="{{ asset('CSS/business-casual.css') }}" rel="stylesheet">
+        <link href="{{ asset('CSS/custom.css') }}" rel="stylesheet">
 
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
@@ -25,7 +26,7 @@
     <body>
 
     <div class="brand">Cedeum</div>
-    <div class="address-bar">Pan�ićeva 14/25 11000 Beograd, Srbija</div>
+    <div class="address-bar">Pan�ićeva 14/25 11000 Beograd, Srbija</div>
 
     <!-- Navigation -->
     <nav class="navbar navbar-default" role="navigation">
@@ -69,7 +70,7 @@
         <!-- /.container -->
     </nav>
 
-
+    {% block pagehead %}{% endblock %}
 
     <div class="container">
 
@@ -119,7 +120,29 @@
             {#</div>#}
         {#</div>#}
 
+        {#<div class="row">#}
+
+            {#<div class="col-md-10">#}
+                {#<div class="pad-left">#}
+                {#<p>asd</p>#}
         {% block body %}{% endblock %}
+                {#</div>#}
+            {#</div>#}
+
+            {#<div class="col-md-2" style="background-color: black">#}
+
+                {#<div class="row pad-right">#}
+                    {#<div class="col-xl">#}
+                        {#<div class="box">#}
+                            {#&#123;&#35;<p>asddsadasdasdsadasdsadsadasd0</p>&#35;&#125;#}
+                            {#<p>Text</p>#}
+                        {#</div>#}
+                    {#</div>#}
+                {#</div>#}
+
+            {#</div>#}
+
+        {#</div>#}
 
         {#<div class="row">#}
             {#<div class="box">#}

@@ -8,6 +8,7 @@ imports:
 parameters:
     locale: en
     article_pictures_directory: '%%kernel.root_dir%/../uploads/article_pictures'
+    articles_per_page: 3
 
 framework:
     #esi:             ~

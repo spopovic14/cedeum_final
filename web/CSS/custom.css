@@ -1,0 +1,8 @@
+.col-centered {
+    float: none;
+    margin: 0 auto;
+    background: #fff;
+    background: rgba(255, 255, 155, 0.9);
+    margin-bottom: 20px;
+    padding: 30px 15px;
+}

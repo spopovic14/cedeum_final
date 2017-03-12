@@ -31,6 +31,11 @@ class Article
     private $title;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    private $titleEn;
+
+    /**
      * @ORM\Column(type="text")
      */
     private $content;
@@ -38,7 +43,17 @@ class Article
     /**
      * @ORM\Column(type="text")
      */
+     private $contentEn;
+
+    /**
+     * @ORM\Column(type="text")
+     */
     private $description;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+     private $descriptionEn;
 
     /**
      * @ORM\Column(type="date")
@@ -49,6 +64,11 @@ class Article
      * @ORM\Column(type="string")
      */
     private $picture;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+     private $festival;
 
 
 
@@ -141,6 +161,47 @@ class Article
     public function setDescription($description)
     {
         $this->description = $description;
+    }
+
+
+    public function getTitleEn()
+    {
+        return $this->titleEn;
+    }
+
+    public function setTitleEn($titleEn)
+    {
+        $this->titleEn = $titleEn;
+    }
+
+    public function getContentEn()
+    {
+        return $this->contentEn;
+    }
+
+    public function setContentEn($titleEn)
+    {
+        $this->contentEn = $titleEn;
+    }
+
+    public function getDescriptionEn()
+    {
+        return $this->descriptionEn;
+    }
+
+    public function setDescriptionEn($titleEn)
+    {
+        $this->descriptionEn = $titleEn;
+    }
+
+    public function getFestival()
+    {
+        return $this->festival;
+    }
+
+    public function setFestival($titleEn)
+    {
+        $this->festival = $titleEn;
     }
 
 

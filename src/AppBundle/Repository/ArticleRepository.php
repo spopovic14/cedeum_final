@@ -40,7 +40,7 @@ class ArticleRepository extends EntityRepository
             ->andWhere('article.releaseDate <= :date')
             ->setParameter('date', new \DateTime())
             ->orderBy('article.releaseDate', 'DESC')
-            ->setMaxResults(5)
+            ->setMaxResults(3)
             ->getQuery()->execute();
     }
 

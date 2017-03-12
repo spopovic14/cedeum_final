@@ -10,10 +10,37 @@ use Symfony\Component\HttpFoundation\Request;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/articles", name="homepage")
+     * @Route("/{_locale}/articles", name="homepage")
      */
     public function indexAction(Request $request)
     {
+
+        // $article = new Article();
+        // $article->setTitle('Togetherness in Zarkovo');
+        // $article->setContent('Lorem ipsum');
+        // $article->setDescription('Opis');
+        // $article->setPicture('741625d73772d3aece8f361b991dbce9.jpeg');
+        // $article->setReleaseDate(new \DateTime());
+        // $this->getDoctrine()->getManager()->persist($article);
+        // $this->getDoctrine()->getManager()->flush();
+
+        $user = new \AppBundle\Entity\User();
+        $user->setUsername('stefan');
+        $user->setPlainPassword('sifra1');
+        $user->setRoles(['ROLE_USER']);
+        $this->getDoctrine()->getManager()->persist($user);
+        $this->getDoctrine()->getManager()->flush();
+
+        // echo "saved user";die;
+
+        // echo $this->get('translator')->getLocale();die;
+
+        $articles = $this->getDoctrine()->getRepository(Article::class)->getLatest();
+
+        return $this->render('default/index.html.twig', [
+              'articles' => $articles,
+              'size' => count($articles),
+        ]);
 
         return $this->redirect($this->generateUrl('articles_page', array('num' => 1)));
 

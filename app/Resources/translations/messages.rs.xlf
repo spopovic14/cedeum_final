@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="home_label">
+                <source>home</source>
+                <target>Pocetna</target>
+            </trans-unit>
+            <trans-unit id="about_label">
+                <source>about</source>
+                <target>O nama</target>
+            </trans-unit>
+            <trans-unit id="projects_label">
+                <source>projects</source>
+                <target>Projekti</target>
+            </trans-unit>
+            <trans-unit id="mater_terra_label">
+                <source>mater_terra</source>
+                <target>Mater Terra</target>
+            </trans-unit>
+            <trans-unit id="bitef_label">
+                <source>bitef</source>
+                <target>Bitef Polifonija</target>
+            </trans-unit>
+            <trans-unit id="activities_label">
+                <source>activities</source>
+                <target>Aktivnosti</target>
+            </trans-unit>
+            <trans-unit id="contact_label">
+                <source>contact</source>
+                <target>Kontakt</target>
+            </trans-unit>
+            <trans-unit id="cedeum_label">
+                <source>cedeum</source>
+                <target>Centar za dramu u edukaciji i umetnosti</target>
+            </trans-unit>
+            <trans-unit id="idea_label">
+                <source>idea</source>
+                <target>Nacionalni centar Međunarodne asocijacije za dramu/pozorište i obrazovanje IDEA</target>
+            </trans-unit>
+            <trans-unit id="latest_activities_label">
+                <source>latest_activities</source>
+                <target>Najnovije aktivnosti</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

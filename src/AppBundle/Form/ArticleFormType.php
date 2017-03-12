@@ -14,6 +14,8 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
 class ArticleFormType extends AbstractType
 {
     /**
@@ -23,10 +25,19 @@ class ArticleFormType extends AbstractType
     {
         $builder
             ->add('title')
+            ->add('festival', ChoiceType::class, array('choices' => array(
+                '/' => null,
+                'Mater Terra' => 'Mater Terra',
+                'Bitef Polifonija' => 'Bitef Polifonija'
+            )))
             ->add('picture', FileType::class, array('label' => 'Picture'))
             ->add('description')
             ->add('content')
-            ->add('releaseDate');
+            ->add('releaseDate')
+
+            ->add('titleEn')
+            ->add('descriptionEn')
+            ->add('contentEn');
     }
 
     /**

@@ -8,6 +8,9 @@
         //        CKEDITOR.replace( 'page_form_content' );
         CKEDITOR.disableAutoInline = true;
         CKEDITOR.inline( 'article_form_content' );
+
+        CKEDITOR.disableAutoInline = true;
+        CKEDITOR.inline( 'article_form_contentEn' );
     </script>
 
 {% endblock %}
@@ -20,12 +23,19 @@
 
                 {{ form_start(form) }}
 
-                {{ form_row(form.title) }}
                 {{ form_row(form.picture) }}
-                {{ form_row(form.description) }}
+                {{ form_row(form.festival) }}
                 {{ form_row(form.releaseDate) }}
-
+                <p>Srpski</p>
+                {{ form_row(form.title) }}
+                {{ form_row(form.description) }}
                 {{ form_row(form.content) }}
+                <br/>
+                <p>Engleski</p>
+                {{ form_row(form.titleEn) }}
+                {{ form_row(form.descriptionEn) }}
+                {{ form_row(form.contentEn) }}
+                <br/>
 
                 <button type="submit" class="btn btn-primary" formnovalidate>Sacuvaj</button>
 

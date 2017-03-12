@@ -17,3 +17,10 @@ services:
         arguments: ["@security.password_encoder"]
         tags:
             - { name: doctrine.event_subscriber }
+
+    app.twig_extension:
+        class: AppBundle\Twig\AppExtension
+        public: false
+        arguments: ["@request_stack"]
+        tags:
+            - { name: twig.extension }

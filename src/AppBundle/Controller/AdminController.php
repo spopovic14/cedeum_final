@@ -74,9 +74,9 @@ class AdminController extends Controller
 
 
     /**
-     * @Route("admin/article/new", name="new_article")
+     * @Route("admin/article/new/{raw}", name="new_article", defaults={"raw" = "editor"})
      */
-    public function newArticleAction(Request $request)
+    public function newArticleAction(Request $request, $raw)
     {
         $form = $this->createForm(ArticleFormType::class);
 
@@ -102,15 +102,23 @@ class AdminController extends Controller
             return $this->redirectToRoute('admin_panel');
         }
 
-        return $this->render('admin/new_article.html.twig', [
+        if($raw == 'editor') {
+
+            return $this->render('admin/new_article.html.twig', [
+                'form' => $form->createView()
+            ]);
+
+        }
+
+        return $this->render('admin/new_article_raw.html.twig', [
             'form' => $form->createView()
         ]);
     }
 
     /**
-     * @Route("/admin/article/{id}", name="edit_article")
+     * @Route("/admin/article/{id}/{raw}", name="edit_article", defaults={"raw" = "editor"})
      */
-    public function editArticleAction(Request $request, Article $article)
+    public function editArticleAction(Request $request, Article $article, $raw)
     {
 //        $path = 'uploads/article_pictures/' . $article->getPicture();
 //        if (file_exists($path) && !is_dir($path)) {
@@ -166,7 +174,15 @@ class AdminController extends Controller
             return $this->redirectToRoute('admin_panel');
         }
 
-        return $this->render('admin/new_article.html.twig', [
+        if($raw == 'editor') {
+
+            return $this->render('admin/new_article.html.twig', [
+                'form' => $form->createView()
+            ]);
+
+        }
+
+        return $this->render('admin/new_article_raw.html.twig', [
             'form' => $form->createView()
         ]);
     }

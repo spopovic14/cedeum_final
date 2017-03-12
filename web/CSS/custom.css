@@ -146,14 +146,34 @@ p {
 
 .navbar-default .navbar-nav > li > a {
     color: #3f3f3f;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
 }
 
 .navbar-nav {
     text-transform: uppercase;
     /*font-weight: 400;*/
-    letter-spacing: 2px;
+    letter-spacing: 1px;
+}
+
+.lang {
+    margin-left: 30px;
+    display: inline-block;
+    /*background-color: red;*/
+}
+
+.flag-icon-en {
+    display: inline-block;
+    background: url('../Images/en-icon.png') no-repeat scroll 0 0 transparent;
+    width: 32px;
+    height: 24px;
+}
+
+.flag-icon-rs {
+    display: inline-block;
+    background: url('../Images/rs-icon.png') no-repeat scroll 0 0 transparent;
+    width: 32px;
+    height: 24px;
 }
 
 .navbar {

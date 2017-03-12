@@ -61,6 +61,15 @@
                         <li>
                             <a href="{{ url('contact_page') }}">{{ 'contact'|trans }}</a>
                         </li>
+
+                        <div class="lang">
+                            <!-- <li> -->
+                                <a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'})) }}"><span class="flag-icon-en"></span></a>
+                            <!-- </li>
+                            <li> -->
+                                <a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'rs'})) }}"><span class="flag-icon-rs"></span></a>
+                            <!-- </li> -->
+                        </div>
                     </ul>
                 </div>
 

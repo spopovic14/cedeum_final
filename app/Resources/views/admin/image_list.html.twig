@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="row pb-32">
+        <div class="col-xs-12">
+
+            <h2>Lista slika:</h2>
+            <br/>
+
+            <ul>
+
+                {% for image in images %}
+                    <li>{{ image.name }}</li>
+                {% endfor %}
+
+            </ul>
+
+        </div>
+    </div>
+
+{% endblock %}

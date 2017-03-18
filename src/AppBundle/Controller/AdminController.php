@@ -21,6 +21,8 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+
 /**
  * @Security("is_granted('ROLE_USER')")
  */
@@ -47,6 +49,19 @@ class AdminController extends Controller
     }
 
     /**
+     * @Route("/admin/list_images", name="list_images")
+     */
+     public function listImagesAction(Request $request)
+     {
+         $em = $this->getDoctrine()->getManager();
+         $images = $em->getRepository('AppBundle:Image')->findAll();
+
+         return $this->render('admin/image_list.html.twig', [
+             'images' => $images
+         ]);
+     }
+
+    /**
      * @Route("/admin/upload_image", name="upload_image")
      */
      public function uploadImageAction(Request $request)
@@ -68,8 +83,16 @@ class AdminController extends Controller
 
              $image->setName($filename);
 
-             $em->persist($image);
-             $em->flush($image);
+
+             try {
+                $em->persist($image);
+                $em->flush($image);
+             }
+             catch(UniqueConstraintViolationException $e) {
+                 return $this->render('admin/admin_error.html.twig', [
+                     'message' => 'Slika sa zadatim imenom vec postoji'
+                 ]);
+             }
 
             //  $file = $article->getPicture();
             //  $filename = md5(uniqid()) . '.' . $file->guessExtension();

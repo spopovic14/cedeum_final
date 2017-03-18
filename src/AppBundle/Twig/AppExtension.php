@@ -20,8 +20,41 @@ class AppExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            new \Twig_SimpleFilter('localize', array($this, 'localizeFilter'))
+            new \Twig_SimpleFilter('localize', array($this, 'localizeFilter')),
+            new \Twig_SimpleFilter('localizePage', array($this, 'localizePageFilter')),
         );
+    }
+
+    public function localizePageFilter($page, $field)
+    {
+        $request = $this->requestStack->getCurrentRequest();
+        $locale = $request->getLocale();
+
+        if($locale == 'en') {
+            switch($field) {
+                case 'title':
+                    return $page->getTitleEn();
+                    break;
+
+                case 'content':
+                    return $page->getContentEn();
+                    break;
+            }
+        }
+
+        elseif($locale == 'rs') {
+            switch($field) {
+                case 'title':
+                    return $page->getTitle();
+                    break;
+
+                case 'content':
+                    return $page->getContent();
+                    break;
+            }
+        }
+
+        return '';
     }
 
     public function localizeFilter($article, $field)

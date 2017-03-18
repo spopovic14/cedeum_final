@@ -10,6 +10,7 @@ namespace AppBundle\Form;
 
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextAreaType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -32,12 +33,16 @@ class ArticleFormType extends AbstractType
             )))
             ->add('picture', FileType::class, array('label' => 'Picture'))
             ->add('description')
-            ->add('content')
+            ->add('content', TextAreaType::class, array(
+                'attr' => array('rows' => 25)
+            ))
             ->add('releaseDate')
 
             ->add('titleEn')
             ->add('descriptionEn')
-            ->add('contentEn');
+            ->add('contentEn', TextAreaType::class, array(
+                'attr' => array('rows' => 25)
+            ));
     }
 
     /**

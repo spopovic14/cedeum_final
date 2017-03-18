@@ -10,6 +10,7 @@ namespace AppBundle\Form;
 
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -20,7 +21,14 @@ class PageFormType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('content');
+            ->add('content', TextAreaType::class, array(
+                'attr' => array('rows' => 25)
+            ))
+
+            ->add('titleEn')
+            ->add('contentEn', TextAreaType::class, array(
+                'attr' => array('rows' => 25)
+            ));
     }
 
     /**

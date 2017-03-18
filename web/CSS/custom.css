@@ -9,7 +9,7 @@
 }
 
 p {
-	font-size: 1.50em;
+    font-size: 1.50em;
 	/*font-family: ‘Times New Roman’, Times, serif;*/
 	font-family: Arial;
 }
@@ -125,7 +125,6 @@ p {
 }
 
 .bord {
-    border: 4px solid rgb(254, 204, 57);
     padding: 12px;
     color: rgb(254, 204, 57);
     font-size: 2.00em;

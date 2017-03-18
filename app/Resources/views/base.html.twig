@@ -50,10 +50,10 @@
                             <a href="#">{{ 'projects'|trans }}</a>
                         </li>
                         <li>
-                            <a href="#">{{ 'mater_terra'|trans }}</a>
+                            <a href="#">{{ 'bitef'|trans }}</a>
                         </li>
                         <li>
-                            <a href="#">{{ 'bitef'|trans }}</a>
+                            <a href="#">{{ 'mater_terra'|trans }}</a>
                         </li>
                         <li>
                             <a href="#">{{ 'activities'|trans }}</a>
@@ -90,10 +90,12 @@
         </div>
     </div>
 
+    <div class="container pb-32 pt-32">
+        {% block body %}{% endblock %}
+    </div>
+
     {% block content %}
-        <div class="container pb-32 pt-32">
-            {% block body %}{% endblock %}
-        </div>
+
     {% endblock %}
 
     <div class="container-fluid">

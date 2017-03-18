@@ -1,26 +1,62 @@
 {% extends 'base.html.twig' %}
 
+{% block body %}
+
+    {% if article.raw == null %}
+
+        <div class="row">
+            <div class="col-xs-12">
+                <h1 class="text-center">{{ article|localize('title') }}</h1>
+            </div>
+        </div>
+
+        <div class="row pt-18 pb-32">
+            <div class="col-xs-12 col-md-8 col-centered center-block">
+                <img src="{{ asset('uploads/article_pictures/' ~ article.picture) }}" class="img-full img-responsive">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                {{ article|localize('content')|replace({'#!' : '<img class="img-full img-responsive" src="' ~ asset('uploads/article_pictures/'), '!#' : '">'})|raw }}
+
+                <br/>
+                <p><span class="text-muted">{{ article.releaseDate|date("d/m/Y") }}</span></p>
+            </div>
+        </div>
+
+    {% endif %}
+
+{% endblock %}
+
 {% block content %}
 
-    <div class="row">
-        <div class="col-xs-12">
-            <h1 class="text-center">{{ article|localize('title') }}</h1>
-        </div>
-    </div>
+    {% if article.raw %}
 
-    <div class="row pt-18 pb-32">
-        <div class="col-xs-12 col-md-8 col-centered center-block">
-            <img src="{{ asset('uploads/article_pictures/' ~ article.picture) }}" class="img-full img-responsive">
-        </div>
-    </div>
+        <div class="container">
 
-    <div class="row">
-        <div class="col-xs-12">
-            {{ article|localize('content')|raw }}
+            <div class="row">
+                <div class="col-xs-12">
+                    <h1 class="text-center">{{ article|localize('title') }}</h1>
+                </div>
+            </div>
 
-            <br/>
-            <p><span class="text-muted">{{ article.releaseDate|date("d/m/Y") }}</span></p>
+            <div class="row pt-18 pb-32">
+                <div class="col-xs-12 col-md-8 col-centered center-block">
+                    <img src="{{ asset('uploads/article_pictures/' ~ article.picture) }}" class="img-full img-responsive">
+                </div>
+            </div>
+
         </div>
-    </div>
+
+        {{ article|localize('content')|replace({'#!' : '<img class="img-full img-responsive" src="' ~ asset('uploads/article_pictures/'), '!#' : '">'})|raw }}
+
+        <div class="container">
+            <div class="row">
+                <p><span class="text-muted">{{ article.releaseDate|date("d/m/Y") }}</span></p>
+            </div>
+        </div>
+
+    {% endif %}
 
 {% endblock %}

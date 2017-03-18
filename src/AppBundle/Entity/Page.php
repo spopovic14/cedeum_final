@@ -36,6 +36,23 @@ class Page
     private $content;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    private $titleEn;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $contentEn;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+     private $raw = false;
+
+
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -75,8 +92,47 @@ class Page
         $this->content = $content;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getTitleEn()
+    {
+        return $this->titleEn;
+    }
 
+    /**
+     * @param mixed $title
+     */
+    public function setTitleEn($title)
+    {
+        $this->titleEn = $title;
+    }
 
+    /**
+     * @return mixed
+     */
+    public function getContentEn()
+    {
+        return $this->contentEn;
+    }
+
+    /**
+     * @param mixed $content
+     */
+    public function setContentEn($content)
+    {
+        $this->contentEn = $content;
+    }
+
+    public function getRaw()
+    {
+        return $this->raw;
+    }
+
+    public function setRaw($raw)
+    {
+        $this->raw = $raw;
+    }
 
 
 }

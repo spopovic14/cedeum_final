@@ -47,21 +47,35 @@ class AdminController extends Controller
 
 
     /**
-     * @Route("/admin/pages/{id}", name="page_edit")
+     * @Route("/admin/pages/{id}/{raw}", name="page_edit", defaults={"raw" = "editor"})
      */
-    public function editPageAction(Request $request, Page $page)
+    public function editPageAction(Request $request, Page $page, $raw)
     {
         $form = $this->createForm(PageFormType::class, $page);
 
         $form->handleRequest($request);
         if($form->isValid()) {
             $page = $form->getData();
+
+            if($raw == 'editor') {
+                $page->setRaw(false);
+            }
+            else {
+                $page->setRaw(true);
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($page);
             $em->flush();
 
             $this->addFlash('success', 'Stranica sacuvana');
             return $this->redirectToRoute('admin_panel');
+        }
+
+        if($raw == 'raw') {
+            return $this->render('page/edit_raw.html.twig', [
+                'form' => $form->createView()
+            ]);
         }
 
         return $this->render('page/edit.html.twig', [
@@ -94,6 +108,13 @@ class AdminController extends Controller
             );
 
             $article->setPicture($filename);
+
+            if($raw == 'editor') {
+                $article->setRaw(false);
+            }
+            else {
+                $article->setRaw(true);
+            }
 
             $em->persist($article);
             $em->flush($article);
@@ -165,6 +186,13 @@ class AdminController extends Controller
 //            );
 //
 //            $article->setPicture($filename);
+
+            if($raw == 'editor') {
+                $article->setRaw(false);
+            }
+            else {
+                $article->setRaw(true);
+            }
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($article);

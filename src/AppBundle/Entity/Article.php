@@ -70,6 +70,11 @@ class Article
      */
      private $festival;
 
+     /**
+      * @ORM\Column(type="boolean")
+      */
+     private $raw = false;
+
 
 
 
@@ -202,6 +207,16 @@ class Article
     public function setFestival($titleEn)
     {
         $this->festival = $titleEn;
+    }
+
+    public function getRaw()
+    {
+        return $this->raw;
+    }
+
+    public function setRaw($raw)
+    {
+        $this->raw = $raw;
     }
 
 

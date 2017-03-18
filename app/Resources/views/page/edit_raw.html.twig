@@ -1,19 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block javascripts %}
-
-    <script type="text/javascript" src="{{ asset('ckeditor/ckeditor.js') }}"></script>
-
-    <script type="text/javascript">
-//        CKEDITOR.replace( 'page_form_content' );
-            CKEDITOR.disableAutoInline = true;
-            CKEDITOR.inline( 'page_form_content' );
-            CKEDITOR.disableAutoInline = true;
-            CKEDITOR.inline( 'page_form_contentEn' );
-    </script>
-
-{% endblock %}
-
 {% block body %}
 
     <div class="row">

@@ -9,6 +9,7 @@ parameters:
     locale: en
     app_locales: en|rs
     article_pictures_directory: '%kernel.root_dir%/../web/uploads/article_pictures'
+    upload_pictures_directory: '%kernel.root_dir%/../web/uploads/uploaded_pictures'
     articles_per_page: 3
 
 framework:

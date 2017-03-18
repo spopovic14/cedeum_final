@@ -3,18 +3,21 @@
 namespace AppBundle\Twig;
 
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 
 class AppExtension extends \Twig_Extension
 {
 
     private $requestStack;
+    private $container;
 
 
 
-    public function __construct(RequestStack $requestStack)
+    public function __construct(RequestStack $requestStack, ContainerInterface $container)
     {
         $this->requestStack = $requestStack;
+        $this->container = $container;
     }
 
     public function getFilters()
@@ -22,6 +25,7 @@ class AppExtension extends \Twig_Extension
         return array(
             new \Twig_SimpleFilter('localize', array($this, 'localizeFilter')),
             new \Twig_SimpleFilter('localizePage', array($this, 'localizePageFilter')),
+            new \Twig_SimpleFilter('insertImages', array($this, 'insertImages')),
         );
     }
 
@@ -95,6 +99,14 @@ class AppExtension extends \Twig_Extension
         }
 
         return '';
+    }
+
+    public function insertImages($text)
+    {
+        $loc = $this->container->getParameter('upload_pictures_directory') . '/';
+        $new_text = str_replace('#!', '<img class="img-full img-responsive" src="/uploads/uploaded_pictures/', $text);
+        $new_text = str_replace('!#', '">', $new_text);
+        return $new_text;
     }
 
 }

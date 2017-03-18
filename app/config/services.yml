@@ -21,6 +21,6 @@ services:
     app.twig_extension:
         class: AppBundle\Twig\AppExtension
         public: false
-        arguments: ["@request_stack"]
+        arguments: ["@request_stack", "@service_container"]
         tags:
             - { name: twig.extension }

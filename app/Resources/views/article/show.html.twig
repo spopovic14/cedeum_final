@@ -18,7 +18,8 @@
 
         <div class="row">
             <div class="col-xs-12">
-                {{ article|localize('content')|replace({'#!' : '<img class="img-full img-responsive" src="' ~ asset('uploads/article_pictures/'), '!#' : '">'})|raw }}
+                <!-- {{ article|localize('content')|replace({'#!' : '<img class="img-full img-responsive" src="' ~ asset('uploads/uploaded_pictures/'), '!#' : '">'})|raw }} -->
+                    {{ article|localize('content')|insertImages|raw }}
 
                 <br/>
                 <p><span class="text-muted">{{ article.releaseDate|date("d/m/Y") }}</span></p>
@@ -49,7 +50,8 @@
 
         </div>
 
-        {{ article|localize('content')|replace({'#!' : '<img class="img-full img-responsive" src="' ~ asset('uploads/article_pictures/'), '!#' : '">'})|raw }}
+        <!-- {{ article|localize('content')|replace({'#!' : '<img class="img-full img-responsive" src="' ~ asset('uploads/uploaded_pictures/'), '!#' : '">'})|raw }} -->
+        {{ article|localize('content')|insertImages|raw }}
 
         <div class="container">
             <div class="row">

@@ -13,6 +13,7 @@ use AppBundle\Entity\Page;
 use AppBundle\Entity\Article;
 use AppBundle\Form\ArticleFormType;
 use AppBundle\Form\PageFormType;
+use AppBundle\Form\ImageFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -44,6 +45,52 @@ class AdminController extends Controller
             'articles' => $articles,
         ]);
     }
+
+    /**
+     * @Route("/admin/upload_image", name="upload_image")
+     */
+     public function uploadImageAction(Request $request)
+     {
+         $form = $this->createForm(ImageFormType::class);
+         $form->handleRequest($request);
+
+         if($form->isValid()) {
+             $image = $form->getData();
+             $em = $this->getDoctrine()->getManager();
+
+             $file = $image->picture;
+             $filename = $image->getName() . '.' . $file->guessExtension();
+
+             $file->move(
+                 $this->getParameter('upload_pictures_directory'),
+                 $filename
+             );
+
+             $image->setName($filename);
+
+             $em->persist($image);
+             $em->flush($image);
+
+            //  $file = $article->getPicture();
+            //  $filename = md5(uniqid()) . '.' . $file->guessExtension();
+             //
+            //  $file->move(
+            //      $this->getParameter('upload_pictures_directory'),
+            //      $filename
+            //  );
+             //
+            //  $image->setName($filename);
+             //
+            //  $em->persist($article);
+            //  $em->flush($article);
+
+             return $this->redirectToRoute('admin_panel');
+         }
+
+         return $this->render('admin/upload_image.html.twig', [
+             'form' => $form->createView()
+         ]);
+     }
 
 
     /**

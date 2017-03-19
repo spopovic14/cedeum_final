@@ -108,4 +108,22 @@ class ArticleRepository extends EntityRepository
             ->getQuery()->execute();
     }
 
+    public function findProjectArticles($project_id)
+    {
+        return $this->createQueryBuilder('article')
+            ->andWhere('article.project_id = :id')
+            ->setParameter('id', $project_id)
+            ->getQuery()->execute();
+    }
+
+    public function findPublishedProjectArticles($project_id)
+    {
+        return $this->createQueryBuilder('article')
+            ->andWhere('article.project = :id')
+            ->setParameter('id', $project_id)
+            ->andWhere('article.releaseDate <= :date')
+            ->setParameter('date', new \DateTime())
+            ->getQuery()->execute();
+    }
+
 }

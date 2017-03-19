@@ -34,6 +34,24 @@
 <div class="row">
     <div class="col-lg-12">
 
+        <h2>Projekti</h2>
+
+        <p><a href="{{ path("new_project") }}">Dodaj novi</a></p>
+
+        <ul>
+            {% for project in projects %}
+
+            <li><a href="admin/project/{{ project.id }}">{{ project.name }}</a></li>
+
+            {% endfor %}
+        </ul>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+
         <h2>Dogadjaji</h2>
 
         <p><a href="{{ path("new_article") }}">Dodaj novi</a></p>

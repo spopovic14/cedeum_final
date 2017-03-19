@@ -71,6 +71,11 @@ class Article
      private $festival;
 
      /**
+      * @ORM\ManyToOne(targetEntity="Project")
+      */
+     private $project;
+
+     /**
       * @ORM\Column(type="boolean")
       */
      private $raw = false;
@@ -207,6 +212,16 @@ class Article
     public function setFestival($titleEn)
     {
         $this->festival = $titleEn;
+    }
+
+    public function getProject()
+    {
+        return $this->project;
+    }
+
+    public function setProject($project)
+    {
+        $this->project = $project;
     }
 
     public function getRaw()

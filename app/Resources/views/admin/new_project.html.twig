@@ -8,19 +8,16 @@
 
                 {{ form_start(form) }}
 
-                {{ form_row(form.picture) }}
-                {{ form_row(form.festival) }}
-                {{ form_row(form.project) }}
-                {{ form_row(form.releaseDate) }}
+                {{ form_row(form.active) }}
+                <br/>
                 <p>Srpski</p>
-                {{ form_row(form.title) }}
+                {{ form_row(form.name) }}
                 {{ form_row(form.description) }}
-                {{ form_row(form.content) }}
+
                 <br/>
                 <p>Engleski</p>
-                {{ form_row(form.titleEn) }}
+                {{ form_row(form.nameEn) }}
                 {{ form_row(form.descriptionEn) }}
-                {{ form_row(form.contentEn) }}
                 <br/>
 
                 <button type="submit" class="btn btn-primary" formnovalidate>Sacuvaj</button>

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h1 class="text-center">{{ project|localizeProject('name') }}</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            {{ project|localizeProject('description') }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h3>Aktivnosti: (TODO: |trans)</h3>
+
+            {% for article in articles %}
+
+                {{ article|localize('title') }}
+
+            {% endfor %}
+
+        </div>
+    </div>
+
+{% endblock %}

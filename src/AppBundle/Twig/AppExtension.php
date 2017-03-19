@@ -25,6 +25,7 @@ class AppExtension extends \Twig_Extension
         return array(
             new \Twig_SimpleFilter('localize', array($this, 'localizeFilter')),
             new \Twig_SimpleFilter('localizePage', array($this, 'localizePageFilter')),
+            new \Twig_SimpleFilter('localizeProject', array($this, 'localizeProjectFilter')),
             new \Twig_SimpleFilter('insertImages', array($this, 'insertImages')),
         );
     }
@@ -94,6 +95,38 @@ class AppExtension extends \Twig_Extension
 
                 case 'content':
                     return $article->getContent();
+                    break;
+            }
+        }
+
+        return '';
+    }
+
+    public function localizeProjectFilter($project, $field)
+    {
+        $request = $this->requestStack->getCurrentRequest();
+        $locale = $request->getLocale();
+
+        if($locale == 'en') {
+            switch($field) {
+                case 'name':
+                    return $project->getNameEn();
+                    break;
+
+                case 'description':
+                    return $project->getDescriptionEn();
+                    break;
+            }
+        }
+
+        elseif($locale == 'rs') {
+            switch($field) {
+                case 'name':
+                    return $project->getName();
+                    break;
+
+                case 'description':
+                    return $project->getDescription();
                     break;
             }
         }

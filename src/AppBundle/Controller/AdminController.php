@@ -11,9 +11,11 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Page;
 use AppBundle\Entity\Article;
+use AppBundle\Entity\Project;
 use AppBundle\Form\ArticleFormType;
 use AppBundle\Form\PageFormType;
 use AppBundle\Form\ImageFormType;
+use AppBundle\Form\ProjectFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -42,11 +44,59 @@ class AdminController extends Controller
 
         $pages = $this->getDoctrine()->getManager()->getRepository(Page::class)->findAll();
         $articles = $this->getDoctrine()->getManager()->getRepository(Article::class)->getAllOrderByDate();
+        $projects = $this->getDoctrine()->getManager()->getRepository(Project::class)->findAll();
         return $this->render('admin/index.html.twig', [
             'pages' => $pages,
             'articles' => $articles,
+            'projects' => $projects,
         ]);
     }
+
+    /**
+     * @Route("/admin/project/new", name="new_project")
+     */
+     public function newProjectAction(Request $request)
+     {
+         $form = $this->createForm(ProjectFormType::class);
+         $form->handleRequest($request);
+
+         if($form->isValid()) {
+             $project = $form->getData();
+             $em = $this->getDoctrine()->getManager();
+
+             $em->persist($project);
+             $em->flush($project);
+
+             return $this->redirectToRoute('admin_panel');
+         }
+
+         return $this->render('admin/new_project.html.twig', [
+             'form' => $form->createView()
+         ]);
+     }
+
+     /**
+      * @Route("/admin/project/{id}", name="edit_project")
+      */
+     public function editProjectAction(Request $request, Project $project)
+     {
+         $form = $this->createForm(ProjectFormType::class, $project);
+         $form->handleRequest($request);
+
+         if($form->isValid()) {
+             $project = $form->getData();
+             $em = $this->getDoctrine()->getManager();
+
+             $em->persist($project);
+             $em->flush($project);
+
+             return $this->redirectToRoute('admin_panel');
+         }
+
+         return $this->render('admin/new_project.html.twig', [
+             'form' => $form->createView()
+         ]);
+     }
 
     /**
      * @Route("/admin/list_images", name="list_images")

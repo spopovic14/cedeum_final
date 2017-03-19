@@ -8,6 +8,26 @@
     background-repeat: repeat;*/
 }
 
+.trans {
+			background-color: rgba(0, 0, 0, 0);
+			height: 300px;
+			background: url('../Images/mater-tera.png') no-repeat fixed;
+			background-size: cover;
+			background-position: center;
+		}
+
+		.window-text {
+			color: white;
+			font-size: 2.5em;
+			text-align: center;
+			display: block;
+			font-family: Comic Sans MS, Comic Sans, cursive;
+			font-style: italic;
+			line-height: 300px;
+			-webkit-text-stroke-width: 0.3px;
+			-webkit-text-stroke-color: black;
+		}
+
 p {
     font-size: 1.50em;
 	/*font-family: ‘Times New Roman’, Times, serif;*/

@@ -17,7 +17,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-class ArticleFormType extends AbstractType
+class ProjectFormType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -25,25 +25,16 @@ class ArticleFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('festival', ChoiceType::class, array('choices' => array(
-                '/' => null,
-                'Mater Terra' => 'Mater Terra',
-                'Bitef Polifonija' => 'Bitef Polifonija'
-            )))
-            ->add('project')
-            ->add('picture', FileType::class, array('label' => 'Picture'))
+            ->add('name')
             ->add('description')
-            ->add('content', TextAreaType::class, array(
-                'attr' => array('rows' => 25)
-            ))
-            ->add('releaseDate')
 
-            ->add('titleEn')
+            ->add('nameEn')
             ->add('descriptionEn')
-            ->add('contentEn', TextAreaType::class, array(
-                'attr' => array('rows' => 25)
-            ));
+
+            ->add('active', ChoiceType::class, array('choices' => array(
+                'Aktuelan' => true,
+                'Zavrsen' => false
+            )));
     }
 
     /**
@@ -52,7 +43,7 @@ class ArticleFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-           'data_class' => 'AppBundle\Entity\Article'
+           'data_class' => 'AppBundle\Entity\Project'
         ]);
     }
 

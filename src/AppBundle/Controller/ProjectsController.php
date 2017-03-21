@@ -14,6 +14,7 @@ use AppBundle\Entity\Article;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ProjectsController extends Controller
 {
@@ -40,6 +41,17 @@ class ProjectsController extends Controller
            'project' => $project,
            'articles' => $articles,
         ]);
+    }
+
+    /**
+     * @Route("/api/projects/page/{num}", name="json_project_page")
+     */
+    public function jsonProjectsAction(Request $request, $num)
+    {
+        // dump($request); die;
+        $projects = $this->getDoctrine()->getManager()->getRepository(Project::class)->getPageId($num, 1);
+        // $projects = $this->getDoctrine()->getManager()->getRepository(Article::class)->getPublishedPageId($num, 1);
+        return new JsonResponse($projects);
     }
 
 }

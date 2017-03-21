@@ -29,4 +29,31 @@ class ProjectRepository extends EntityRepository
             ->andWhere('project.active = 1');
     }
 
+    public function getBatch($offset, $size)
+    {
+        return $this->createQueryBuilder('project')
+            ->setFirstResult($offset)
+            ->setMaxResults($size)
+            ->getQuery()->execute();
+    }
+
+    public function getPage($num, $size)
+    {
+        return $this->getBatch(($num-1) * $size, $size);
+    }
+
+    public function getBatchId($offset, $size)
+    {
+        return $this->createQueryBuilder('project')
+            ->select('project.id, project.name, project.nameEn')
+            ->setFirstResult($offset)
+            ->setMaxResults($size)
+            ->getQuery()->execute();
+    }
+
+    public function getPageId($num, $size)
+    {
+        return $this->getBatchId(($num-1) * $size, $size);
+    }
+
 }

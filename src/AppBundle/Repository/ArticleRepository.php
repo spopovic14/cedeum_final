@@ -146,4 +146,22 @@ class ArticleRepository extends EntityRepository
             ->getQuery()->execute();
     }
 
+
+    public function getPublishedBatchId($offset, $size)
+    {
+        return $this->createQueryBuilder('a')
+            ->select('a.id, a.title, a.titleEn')
+            ->andWhere('a.releaseDate <= :date')
+            ->setParameter('date', new \DateTime())
+            ->orderBy('a.releaseDate', 'DESC')
+            ->setFirstResult($offset)
+            ->setMaxResults($size)
+            ->getQuery()->execute();
+    }
+
+    public function getPublishedPageId($num, $size)
+    {
+        return $this->getPublishedBatchId(($num-1) * $size, $size);
+    }
+
 }

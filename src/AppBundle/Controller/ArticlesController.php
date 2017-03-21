@@ -13,6 +13,7 @@ use AppBundle\Entity\Article;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ArticlesController extends Controller
 {
@@ -39,6 +40,15 @@ class ArticlesController extends Controller
         return $this->render('article/show.html.twig', [
            'article' => $article
         ]);
+    }
+
+    /**
+     * @Route("/api/articles/page/{num}", name="json_article_page")
+     */
+    public function jsonArticlesAction(Request $request, $num)
+    {
+        $articles = $this->getDoctrine()->getManager()->getRepository(Article::class)->getPublishedPageId($num, 10);
+        return new JsonResponse($articles);
     }
 
 }

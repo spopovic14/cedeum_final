@@ -126,4 +126,24 @@ class ArticleRepository extends EntityRepository
             ->getQuery()->execute();
     }
 
+    public function getPublishedMaterTerra()
+    {
+        return $this->createQueryBuilder('article')
+            ->andWhere('article.releaseDate <= :date')
+            ->setParameter('date', new \DateTime())
+            ->andWhere('article.festival = "Mater Terra"')
+            ->orderBy('article.releaseDate', 'DESC')
+            ->getQuery()->execute();
+    }
+
+    public function getPublishedBitef()
+    {
+        return $this->createQueryBuilder('article')
+            ->andWhere('article.releaseDate <= :date')
+            ->setParameter('date', new \DateTime())
+            ->andWhere('article.festival = "Bitef Polifonija"')
+            ->orderBy('article.releaseDate', 'DESC')
+            ->getQuery()->execute();
+    }
+
 }

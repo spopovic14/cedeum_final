@@ -42,6 +42,14 @@
                 <source>latest_activities</source>
                 <target>Latest activities</target>
             </trans-unit>
+            <trans-unit id="current_projects_label">
+                <source>current_projects</source>
+                <target>Current projects</target>
+            </trans-unit>
+            <trans-unit id="archive_label">
+                <source>archive</source>
+                <target>Archive</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -42,6 +42,14 @@
                 <source>latest_activities</source>
                 <target>Najnovije aktivnosti</target>
             </trans-unit>
+            <trans-unit id="current_projects_label">
+                <source>current_projects</source>
+                <target>Aktuelni projekti</target>
+            </trans-unit>
+            <trans-unit id="archive_label">
+                <source>archive</source>
+                <target>Arhiva</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

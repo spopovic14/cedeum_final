@@ -31,6 +31,11 @@ class Project
     private $description;
 
     /**
+     * @ORM\Column(type="text")
+     */
+    private $longDescription;
+
+    /**
      * @ORM\Column(type="string")
      */
     private $nameEn;
@@ -39,6 +44,11 @@ class Project
      * @ORM\Column(type="text")
      */
     private $descriptionEn;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $longDescriptionEn;
 
     /**
      * @ORM\Column(type="boolean")
@@ -87,6 +97,16 @@ class Project
         $this->description = $name;
     }
 
+    public function getLongDescription()
+    {
+        return $this->longDescription;
+    }
+
+    public function setLongDescription($name)
+    {
+        $this->longDescription = $name;
+    }
+
     public function getDescriptionEn()
     {
         return $this->descriptionEn;
@@ -95,6 +115,16 @@ class Project
     public function setDescriptionEn($name)
     {
         $this->descriptionEn = $name;
+    }
+
+    public function getLongDescriptionEn()
+    {
+        return $this->longDescriptionEn;
+    }
+
+    public function setLongDescriptionEn($name)
+    {
+        $this->longDescriptionEn = $name;
     }
 
     public function isActive()

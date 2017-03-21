@@ -23,4 +23,10 @@ class ProjectRepository extends EntityRepository
             ->getQuery()->execute();
     }
 
+    public function findActiveQuery()
+    {
+        return $this->createQueryBuilder('project')
+            ->andWhere('project.active = 1');
+    }
+
 }

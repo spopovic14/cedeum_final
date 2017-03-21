@@ -116,6 +116,10 @@ class AppExtension extends \Twig_Extension
                 case 'description':
                     return $project->getDescriptionEn();
                     break;
+
+                case 'longDescription':
+                    return $project->getLongDescriptionEn();
+                    break;
             }
         }
 
@@ -127,6 +131,10 @@ class AppExtension extends \Twig_Extension
 
                 case 'description':
                     return $project->getDescription();
+                    break;
+
+                case 'longDescription':
+                    return $project->getLongDescription();
                     break;
             }
         }

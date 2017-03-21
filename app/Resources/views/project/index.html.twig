@@ -4,11 +4,14 @@
 
     <div class="row">
         <div class="col-xs-12">
-            <h1 class="text-center">Projekti (TODO: |trans)</h1>
+            <h1 class="text-center pb-18">{{ 'current_projects'|trans }}</h1>
 
             {% for project in projects %}
 
-                <p><a href="{{ path('show_project', { 'id' : project.id }) }}">{{ project|localizeProject('name') }}</a></p>
+                <hr class="short-line mt-32 mb-32"/>
+
+                <h3 class="text-center"><a href="{{ path('show_project', { 'id' : project.id }) }}">{{ project|localizeProject('name') }}</a></h3>
+                <p>{{ project|localizeProject('description') }}</p>
 
             {% endfor %}
 

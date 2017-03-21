@@ -1,5 +1,20 @@
 {% extends 'base.html.twig' %}
 
+{% block javascripts %}
+
+    <script type="text/javascript" src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+
+    <script type="text/javascript">
+        //        CKEDITOR.replace( 'page_form_content' );
+        CKEDITOR.disableAutoInline = true;
+        CKEDITOR.inline( 'project_form_longDescription' );
+
+        CKEDITOR.disableAutoInline = true;
+        CKEDITOR.inline( 'project_form_longDescriptionEn' );
+    </script>
+
+{% endblock %}
+
 {% block body %}
 
     <div class="row">
@@ -13,11 +28,13 @@
                 <p>Srpski</p>
                 {{ form_row(form.name) }}
                 {{ form_row(form.description) }}
+                {{ form_row(form.longDescription) }}
 
                 <br/>
                 <p>Engleski</p>
                 {{ form_row(form.nameEn) }}
                 {{ form_row(form.descriptionEn) }}
+                {{ form_row(form.longDescriptionEn) }}
                 <br/>
 
                 <button type="submit" class="btn btn-primary" formnovalidate>Sacuvaj</button>

@@ -27,9 +27,11 @@ class ProjectFormType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
+            ->add('longDescription')
 
             ->add('nameEn')
             ->add('descriptionEn')
+            ->add('longDescriptionEn')
 
             ->add('active', ChoiceType::class, array('choices' => array(
                 'Aktuelan' => true,

@@ -16,6 +16,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Doctrine\ORM\EntityRepository;
 
 class ArticleFormType extends AbstractType
 {
@@ -31,7 +33,15 @@ class ArticleFormType extends AbstractType
                 'Mater Terra' => 'Mater Terra',
                 'Bitef Polifonija' => 'Bitef Polifonija'
             )))
-            ->add('project')
+            ->add('project', EntityType::class, array(
+                'class' => 'AppBundle:Project',
+                'query_builder' => function(EntityRepository $er) {
+                    return $er->findActiveQuery();
+                },
+                'choice_label' => 'name',
+                'required' => false,
+                'empty_data' => null,
+            ))
             ->add('picture', FileType::class, array('label' => 'Picture'))
             ->add('description')
             ->add('content', TextAreaType::class, array(

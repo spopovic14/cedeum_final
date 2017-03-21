@@ -10,19 +10,27 @@
 
     <div class="row">
         <div class="col-xs-12">
-            {{ project|localizeProject('description') }}
+            {{ project|localizeProject('longDescription')|insertImages|raw }}
         </div>
     </div>
 
     <div class="row">
         <div class="col-xs-12">
-            <h3>Aktivnosti: (TODO: |trans)</h3>
 
-            {% for article in articles %}
+            {% if articles %}
 
-                {{ article|localize('title') }}
+                <hr class="short-line mb-32 mt-32"/>
 
-            {% endfor %}
+                <h3>{{ 'activities'|trans }}</h3>
+                <hr/>
+
+                {% for article in articles %}
+
+                    <p><a href="{{ path("show_article", { 'id' : article.id }) }}">{{ article|localize('title') }}</a></p>
+
+                {% endfor %}
+
+            {% endif %}
 
         </div>
     </div>

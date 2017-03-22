@@ -1,7 +1,7 @@
 <script type="text/javascript">
 
 numArticle = 1;
-baseArticleUrl = '{{ path('show_article', { 'id' : 'article_id' }) }}';
+baseArticleUrl = '{{ path('edit_article', { 'id' : 'article_id' }) }}';
 locale = '{{ app.request.locale }}';
 
 function getArticles() {
@@ -14,7 +14,7 @@ function getArticles() {
                 numArticle = numArticle - 1;
                 return;
             }
-            var inner = "";
+            var inner = '<ul class="admin-list">';
             var title;
             var index;
             for(index = 0; index < result.length; index++) {
@@ -24,8 +24,9 @@ function getArticles() {
                 else {
                     title = result[index].title;
                 }
-                inner = inner + '<p><a href="' + baseArticleUrl.replace("article_id", result[index].id) + '">' + title + '</a></p>';
+                inner = inner + '<li><a href="' + baseArticleUrl.replace("article_id", result[index].id) + '">' + title + '</a></li>';
             }
+            inner = inner + '</ul>';
             $('#articleLinks').html(inner);
         }
     });

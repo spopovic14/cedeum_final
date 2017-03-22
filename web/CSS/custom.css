@@ -1,11 +1,5 @@
-.blue {
-    /*background-color: blue;
-    opacity: 0.1;*/
-    /*background-image: inherit;*/
-    /*background-image: url('pattern.png');
-    background-position: left top;
-    background-origin:
-    background-repeat: repeat;*/
+.admin-list > li > a {
+    font-size: 1.50em;
 }
 
 .trans {

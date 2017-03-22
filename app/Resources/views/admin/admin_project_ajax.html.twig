@@ -1,7 +1,7 @@
 <script type="text/javascript">
 
 numProject = 1;
-baseProjectUrl = '{{ path('show_project', { 'id' : 'project_id' }) }}';
+baseProjectUrl = '{{ path('edit_project', { 'id' : 'project_id' }) }}';
 locale = '{{ app.request.locale }}';
 
 function getProjects() {
@@ -14,7 +14,7 @@ function getProjects() {
                 numProject = numProject - 1;
                 return;
             }
-            var inner = "";
+            var inner = '<ul class="admin-list">';
             var title;
             var index;
             for(index = 0; index < result.length; index++) {
@@ -24,8 +24,9 @@ function getProjects() {
                 else {
                     title = result[index].name;
                 }
-                inner = inner + '<p><a href="' + baseProjectUrl.replace("project_id", result[index].id) + '">' + title + '</a></p>';
+                inner = inner + '<li><a href="' + baseProjectUrl.replace("project_id", result[index].id) + '">' + title + '</a></li>';
             }
+            inner = inner + '</ul>';
             $('#projectLinks').html(inner);
         }
     });

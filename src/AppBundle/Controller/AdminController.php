@@ -43,12 +43,12 @@ class AdminController extends Controller
          */
 
         $pages = $this->getDoctrine()->getManager()->getRepository(Page::class)->findAll();
-        $articles = $this->getDoctrine()->getManager()->getRepository(Article::class)->getAllOrderByDate();
-        $projects = $this->getDoctrine()->getManager()->getRepository(Project::class)->findAll();
+        // $articles = $this->getDoctrine()->getManager()->getRepository(Article::class)->getAllOrderByDate();
+        // $projects = $this->getDoctrine()->getManager()->getRepository(Project::class)->findAll();
         return $this->render('admin/index.html.twig', [
             'pages' => $pages,
-            'articles' => $articles,
-            'projects' => $projects,
+            // 'articles' => $articles,
+            // 'projects' => $projects,
         ]);
     }
 

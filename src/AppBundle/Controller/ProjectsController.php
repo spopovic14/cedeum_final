@@ -49,7 +49,7 @@ class ProjectsController extends Controller
     public function jsonProjectsAction(Request $request, $num)
     {
         // dump($request); die;
-        $projects = $this->getDoctrine()->getManager()->getRepository(Project::class)->getPageId($num, 1);
+        $projects = $this->getDoctrine()->getManager()->getRepository(Project::class)->getPageId($num, 10);
         // $projects = $this->getDoctrine()->getManager()->getRepository(Article::class)->getPublishedPageId($num, 1);
         return new JsonResponse($projects);
     }

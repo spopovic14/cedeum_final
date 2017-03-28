@@ -312,7 +312,7 @@ p {
 }
 
 .mb-18 {
-    margin-top: 18px;
+    margin-bottom: 18px;
 }
 
 .mt-12 {
@@ -378,10 +378,38 @@ body {
     background: none;
 }
 
+.ml-12 {
+	margin-left: 12px;
+}
+
+.mr-12 {
+	margin-right: 12px;
+}
+
+.project-card {
+	margin-top: 12px;
+	margin-bottom: 12px;
+	padding-top: 6px;
+	padding-left: 6px;
+	padding-right: 6px;
+	height: 600px;
+	overflow: hidden;
+	background-color: rgba(211, 211, 211, 0.2);
+}
+
+.project-title {
+    display: table-cell;
+    height: 100%;
+}
+
 @media screen and (max-width: 768px) {
     .inner {
         margin-top: 80px;
     }
+
+	.project-card {
+		height: 100%;
+	}
 }
 
 @media screen and (max-width: 768px) {

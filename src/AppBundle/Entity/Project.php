@@ -55,6 +55,11 @@ class Project
      */
     private $active;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $picture;
+
 
 
     public function getId()
@@ -140,6 +145,16 @@ class Project
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
     }
 
 }

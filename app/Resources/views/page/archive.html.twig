@@ -15,23 +15,18 @@
 
             <hr class="short-line mt-18 mb-18"/>
 
-            <h2>{{ 'projects'|trans }}</h2>
-            <hr class="mb-18 mt-18"/>
+            <!-- <h2>{{ 'projects'|trans }}</h2> -->
+            <!-- <hr class="mb-18 mt-18"/> -->
 
-            <div id="projectLinks"></div>
+            <!-- <div id="projectLinks">
+                <project-list></project-list>
+            </div> -->
 
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-xs-12">
-
-            <div class="center-block text-center">
-                <button class="btn" id="prev">Prev</button>
-                <button class="btn" id="next">Next</button>
-            </div>
-
-        </div>
+    <div id="projectLinks">
+        <projects></projects>
     </div>
 
 {% endblock %}
@@ -42,63 +37,201 @@
 
 
 
+{% block headscripts %}
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="{{ asset('js/vue.js') }}"></script>
+{% endblock %}
+
+
+
 {% block javascripts %}
 
-{% include 'project_ajax.html.twig' %}
+{# {% include 'project_ajax.html.twig' %} #}
 
-    <!-- <script type="text/javascript" src="{{ asset("js/test.js") }}"></script> -->
+    <script>
 
-<!-- <script type="text/javascript">
+        var projectPage = 1;
 
-    num = 1;
-    baseArticleUrl = '{{ path('show_article', { 'id' : 'article_id' }) }}'
-    locale = '{{ app.request.locale }}';
-
-    function getArticles() {
-        var url = '{{ path('json_article_page', { 'num' : 'var_number' }) }}';
-        url = url.replace("var_number", num);
-        $.ajax({
-            url: url,
-            success: function(result) {
-                if(JSON.stringify(result) == "[]") {
-                    num = num - 1;
-                    return;
+        var projectCard = {
+            props: ['project'],
+            template: `
+                <div v-if="project" class="col-xs-12 col-sm-6 col-lg-4">
+                    <div class="card project-card">
+                        <img class="card-img-top img-responsive img-rounded" v-bind:src="image">
+                        <div class="card-block">
+                            <h3 class="card-title"><a v-bind:href="getLink">
+                                <span v-if="isEnglish">^{ project.nameEn }^</span>
+                                <span v-else>^{ project.name }^</span>
+                            </a></h3>
+                            <p class="card-text">
+                                <span v-if="isEnglish">^{ project.descriptionEn }^</span>
+                                <span v-else>^{ project.description }^</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            `,
+            computed: {
+                isEnglish: function() {
+                    return '{{ app.request.locale }}' === 'en';
+                },
+                getLink: function() {
+                    var link = '{{ path('show_project', { 'id': 'proj_id' }) }}';
+                    link = link.replace('proj_id', this.project.id);
+                    return link;
+                },
+                image: function() {
+                    var img = '{{ asset('uploads/article_pictures/^replaceThis^') }}';
+                    return img.replace('^replaceThis^', this.project.picture);
                 }
-                var inner = "";
-                var title;
-                var index;
-                for(index = 0; index < result.length; index++) {
-                    if(locale == 'en') {
-                        title = result[index].titleEn;
-                    }
-                    else {
-                        title = result[index].title;
-                    }
-                    inner = inner + '<p><a href="' + baseArticleUrl.replace("article_id", result[index].id) + '">' + title + '</a></p>';
+            }
+        }
+
+        Vue.component('projects', {
+            components: {
+                'project-card': projectCard
+            },
+            template: `
+                <div>
+                    <div class="row">
+                        <project-card v-for="project in projects" :key="project.id" v-bind:project="project"></project-card>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 text-center">
+                            <button class="btn btn-primary" v-on:click="prevPage">Prev</button>
+                            <button class="btn btn-primary" v-on:click="nextPage">Next</button>
+                        </div>
+                    </div>
+                </div>
+            `,
+            data: function() {
+                return {
+                    projects: null
                 }
-                $('#links').html(inner);
+            },
+            methods: {
+                loadProjects: function() {
+                    var comp = this;
+                    var url = '{{ path('json_project_page', { 'num': 'num_page' }) }}';
+                    url = url.replace('num_page', projectPage);
+                    axios.get(url)
+                        .then(function(response) {
+                            if(response.data.length == 0) {
+                                projectPage = projectPage - 1;
+                                return;
+                            }
+                            comp.projects = response.data;
+
+                        })
+                        .catch(function(error) {
+                            alert('error ' + error);
+                        })
+                },
+                nextPage: function() {
+                    projectPage = projectPage + 1;
+                    this.loadProjects();
+                },
+                prevPage: function() {
+                    if(projectPage <= 1) {
+                        return;
+                    }
+                    projectPage = projectPage - 1;
+                    this.loadProjects();
+                }
+            },
+            mounted: function() {
+                this.loadProjects();
+            },
+            computed: {
+                isEnglish: function() {
+                    return '{{ app.request.locale }}' === 'en';
+                }
             }
-        });
-    }
+        })
 
-    $(document).ready(function() {
-        getArticles(num);
-
-
-        $('#prev').on('click', function() {
-            if(num == 1) {
-                return;
+        var listItem = {
+            props: ['project'],
+            template: `
+                <h3 v-if="project">
+                    <a v-bind:href="getLink">
+                        <span v-if="isEnglish">^{ project.nameEn }^</span>
+                        <span v-else>^{ project.name }^</span>
+                    </a>
+                </h3>
+            `,
+            computed: {
+                getLink: function() {
+                    var link = '{{ path('show_project', { 'id': 'proj_id' }) }}';
+                    link = link.replace('proj_id', this.project.id);
+                    return link;
+                },
+                isEnglish: function() {
+                    return '{{ app.request.locale }}' === 'en';
+                }
             }
-            num = num - 1;
-            getArticles();
-        });
+        }
 
-        $('#next').on('click', function() {
-            num = num + 1;
-            getArticles();
-        });
-    });
+        Vue.component('project-list', {
+            components: {
+                'list-item': listItem
+            },
+            template: `
+                <div>
+                    <div class="row">
+                        <list-item v-for="project in projects" :key="project.id" v-bind:project="project"></list-item>
+                    </div>
 
-</script> -->
+                    <div class="row">
+                        <div class="col-xs-12 text-center">
+                            <button class="btn btn-primary" v-on:click="prevPage">Prev</button>
+                            <button class="btn btn-primary" v-on:clicl="nextPage">Next</button>
+                        </div>
+                    </div>
+                </div>
+            `,
+            data: function() {
+                return {
+                    projects: null,
+                    test: {
+                        name: 'Ime projekta'
+                    }
+                }
+            },
+            methods: {
+                loadProjects: function() {
+                    var comp = this;
+                    var url = '{{ path('json_project_page', { 'num': 'num_page' }) }}';
+                    url = url.replace('num_page', projectPage);
+                    axios.get(url)
+                        .then(function(response) {
+                            comp.projects = response.data;
+
+                        })
+                        .catch(function(error) {
+                            alert('error ' + error);
+                        })
+                },
+                nextPage: function() {
+                    projectPage = projectPage + 1;
+                    loadPage();
+                },
+                prevPage: function() {
+                    projectPage = projectPage - 1;
+                    loadPage();
+                }
+            },
+            mounted: function() {
+                loadProjects();
+            }
+        })
+
+        Vue.options.delimiters = ['^{', '}^']
+
+        var app = new Vue({
+            el: '#projectLinks',
+        })
+
+    </script>
 
 {% endblock %}

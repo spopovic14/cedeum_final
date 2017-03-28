@@ -45,7 +45,7 @@ class ProjectRepository extends EntityRepository
     public function getBatchId($offset, $size)
     {
         return $this->createQueryBuilder('project')
-            ->select('project.id, project.name, project.nameEn')
+            ->select('project.id, project.name, project.nameEn, project.description, project.descriptionEn, project.picture')
             ->setFirstResult($offset)
             ->setMaxResults($size)
             ->getQuery()->execute();

@@ -26,7 +26,22 @@
 
                 {% for article in articles %}
 
-                    <p><a href="{{ path("show_article", { 'id' : article.id }) }}">{{ article|localize('title') }}</a></p>
+                <div class="row vertical-align">
+                    <hr class="mt-32 mb-32 short-line">
+
+                    <div class="col-md-7 activity-preview {% if loop.index0 % 2 == 0 %} col-md-push-5 {% endif %}">
+                        <h2 class="activity-text"><a href="{{ path('show_article', { 'id' : article.id }) }}">{{ article|localize('title') }}</a></h2>
+                    </div>
+                    <div class="col-md-5 {% if loop.index0 % 2 == 0 %} col-md-pull-7 {% endif %}">
+                        <img class="img-responsive center-block activity-img" src="{{ asset('uploads/article_pictures/' ~ article.Picture) }}">
+                    </div>
+                </div>
+
+                {% endfor %}
+
+                {% for article in articles %}
+
+                    <!-- <p><a href="{{ path("show_article", { 'id' : article.id }) }}">{{ article|localize('title') }}</a></p> -->
 
                 {% endfor %}
 

@@ -25,6 +25,7 @@ class ProjectFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('picture', FileType::class, array('label' => 'Picture'))
             ->add('name')
             ->add('description')
             ->add('longDescription')

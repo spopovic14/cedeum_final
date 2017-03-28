@@ -64,6 +64,16 @@ class AdminController extends Controller
              $project = $form->getData();
              $em = $this->getDoctrine()->getManager();
 
+             $file = $project->getPicture();
+             $filename = md5(uniqid()) . '.' . $file->guessExtension();
+
+             $file->move(
+                 $this->getParameter('article_pictures_directory'),
+                 $filename
+             );
+
+             $project->setPicture($filename);
+
              $em->persist($project);
              $em->flush($project);
 
@@ -80,12 +90,35 @@ class AdminController extends Controller
       */
      public function editProjectAction(Request $request, Project $project)
      {
+         $originalPicture = $project->getPicture();
+         $project->setPicture(null);
+
          $form = $this->createForm(ProjectFormType::class, $project);
          $form->handleRequest($request);
 
          if($form->isValid()) {
              $project = $form->getData();
              $em = $this->getDoctrine()->getManager();
+
+             if($project->getPicture() == null) {
+                 $project->setPicture($originalPicture);
+             }
+             else {
+                 $fs = new Filesystem();
+                 $old = 'uploads/article_pictures/' . $originalPicture;
+                 if(file_exists($old) && !is_dir($old)) {
+                     $fs->remove($old);
+                 }
+                 $file = $project->getPicture();
+                 $filename = md5(uniqid()) . '.' . $file->guessExtension();
+
+                 $file->move(
+                     $this->getParameter('article_pictures_directory'),
+                     $filename
+                 );
+
+                 $project->setPicture($filename);
+             }
 
              $em->persist($project);
              $em->flush($project);

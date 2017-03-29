@@ -365,7 +365,7 @@ p {
 
 body {
     padding-top: 0px;
-    background-image: url('pattern.png');
+    background-image: url('../Images/pattern.png');
     background-repeat: repeat;
 }
 

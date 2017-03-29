@@ -38,7 +38,7 @@ p {
 }
 
 .activity-img {
-    min-width: 400px;
+    /*min-width: 400px;*/
     width: 100%;
     /*background-color: green;*/
     display: block;
@@ -46,7 +46,6 @@ p {
 }
 
 .activity-text {
-    /*background-color: red;*/
     margin-top: 120px;
     display: inline-block;
 }
@@ -404,16 +403,21 @@ body {
 
 @media screen and (max-width: 768px) {
     .inner {
-        margin-top: 80px;
+        margin-top: 10px;
     }
 
 	.project-card {
 		height: 100%;
 	}
+
+    .activity-text {
+        margin-top: 2px;
+        display: inline-block;
+    }
 }
 
 @media screen and (max-width: 768px) {
     .header {
-        min-height: 800px;
+        min-height: 600px;
     }
 }

@@ -9,6 +9,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -27,21 +28,25 @@ class Page
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank()
      */
     private $content;
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
      */
     private $titleEn;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank()
      */
     private $contentEn;
 

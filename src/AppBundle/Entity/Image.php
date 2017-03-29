@@ -4,6 +4,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -16,6 +17,7 @@ class Image
     /**
      * @ORM\Id
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
      */
     private $name;
 

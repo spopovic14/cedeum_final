@@ -148,7 +148,7 @@ class AppExtension extends \Twig_Extension
         $new_text = str_replace('#!', '<img class="img-full img-responsive" src="/uploads/uploaded_pictures/', $text);
         $new_text = str_replace('!#', '">', $new_text);
 
-        $new_text = preg_replace('/%!(.*)[.](.*)!%/', '<a href="/uploads/uploaded_pictures/$1">$1</a>', $new_text);
+        $new_text = preg_replace('/%!(.*)[.](.*)!%/', '<a href="/uploads/uploaded_pictures/$1.$2">$1</a>', $new_text);
 
         return $new_text;
     }

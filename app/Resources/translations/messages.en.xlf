@@ -32,11 +32,11 @@
             </trans-unit>
             <trans-unit id="cedeum_label">
                 <source>cedeum</source>
-                <target>Centre for Drama in Education and Arts</target>
+                <target>Centre for Drama in Education and Art</target>
             </trans-unit>
             <trans-unit id="idea_label">
                 <source>idea</source>
-                <target>National Centre of IDEA, International Drama/Theatre and Education</target>
+                <target>National Centre of IDEA, International Drama/Theatre and Education Association</target>
             </trans-unit>
             <trans-unit id="latest_activities_label">
                 <source>latest_activities</source>

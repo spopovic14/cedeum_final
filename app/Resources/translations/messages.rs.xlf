@@ -4,7 +4,7 @@
         <body>
             <trans-unit id="home_label">
                 <source>home</source>
-                <target>Pocetna</target>
+                <target>Početna</target>
             </trans-unit>
             <trans-unit id="about_label">
                 <source>about</source>

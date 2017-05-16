@@ -164,4 +164,28 @@ class ArticleRepository extends EntityRepository
         return $this->getPublishedBatchId(($num-1) * $size, $size);
     }
 
+
+
+
+
+
+    public function getPublishedBitefBatchId($offset, $size)
+    {
+        return $this->createQueryBuilder('a')
+            ->select('a.id, a.title, a.titleEn, a.picture')
+            ->andWhere('a.festival = :bitef')
+            ->setParameter('bitef', 'Bitef Polifonija')
+            ->andWhere('a.releaseDate <= :date')
+            ->setParameter('date', new \DateTime())
+            ->orderBy('a.releaseDate', 'DESC')
+            ->setFirstResult($offset)
+            ->setMaxResults($size)
+            ->getQuery()->execute();
+    }
+
+    public function getPublishedBitefPageId($num, $size)
+    {
+        return $this->getPublishedBitefBatchId(($num-1) * $size, $size);
+    }
+
 }

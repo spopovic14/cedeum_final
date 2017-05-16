@@ -22,6 +22,9 @@ class PagesController extends Controller
     public function contactAction(Request $request)
     {
         $page = $this->getDoctrine()->getManager()->getRepository('AppBundle:Page')->findOneBy(['title' => 'Kontakt']);
+        if($page == null) {
+            $page = $this->createPage('Kontakt');
+        }
         return $this->render('page/page.html.twig', [
            'page' => $page
         ]);
@@ -33,6 +36,9 @@ class PagesController extends Controller
     public function aboutAction(Request $request)
     {
         $page = $this->getDoctrine()->getManager()->getRepository('AppBundle:Page')->findOneBy(['title' => 'O nama']);
+        if($page == null) {
+            $page = $this->createPage('O nama');
+        }
         return $this->render('page/page.html.twig', [
             'page' => $page
         ]);
@@ -44,25 +50,13 @@ class PagesController extends Controller
      public function bitefAction(Request $request)
      {
          $page = $this->getDoctrine()->getManager()->getRepository('AppBundle:Page')->findOneBy(['title' => 'Bitef']);
-         $articles = $this->getDoctrine()->getManager()->getRepository('AppBundle:Article')->findPublishedBitef();
+         if($page == null) {
+             $page = $this->createPage('Bitef');
+         }
          return $this->render('page/festival.html.twig', [
-             'page' => $page,
-             'articles' => $articles
+             'page' => $page
          ]);
      }
-
-     /**
-      * @Route("/mater-terra", name="mater_page")
-      */
-      public function materAction(Request $request)
-      {
-          $page = $this->getDoctrine()->getManager()->getRepository('AppBundle:Page')->findOneBy(['title' => 'Mater-Terra']);
-          $articles = $this->getDoctrine()->getManager()->getRepository('AppBundle:Article')->findPublishedMaterTerra();
-          return $this->render('page/festival.html.twig', [
-              'page' => $page,
-              'articles' => $articles
-          ]);
-      }
 
       /**
        * @Route("/archive", name="archive_page")
@@ -70,9 +64,28 @@ class PagesController extends Controller
        public function archiveAction(Request $request)
        {
            $page = $this->getDoctrine()->getManager()->getRepository('AppBundle:Page')->findOneBy(['title' => 'Arhiva']);
+           if($page == null) {
+               $page = $this->createPage('Arhiva');
+           }
            return $this->render('page/archive.html.twig', [
                'page' => $page
            ]);
+       }
+
+
+
+
+       private function createPage($title)
+       {
+           $page = new \AppBundle\Entity\Page();
+           $page->setTitle($title);
+           $page->setTitleEn($title);
+           $page->setContent('<p>Sadrzaj</p>');
+           $page->setContentEn('<p>Content</p>');
+           $page->setRaw(false);
+           $this->getDoctrine()->getManager()->persist($page);
+           $this->getDoctrine()->getManager()->flush();
+           return $page;
        }
 
 }

@@ -47,7 +47,16 @@ class ArticlesController extends Controller
      */
     public function jsonArticlesAction(Request $request, $num)
     {
-        $articles = $this->getDoctrine()->getManager()->getRepository(Article::class)->getPublishedPageId($num, 10);
+        $articles = $this->getDoctrine()->getManager()->getRepository(Article::class)->getPublishedPageId($num, 12);
+        return new JsonResponse($articles);
+    }
+
+    /**
+     * @Route("/api/articles/bitef/page/{num}", name="json_bitef_article_page")
+     */
+    public function jsonBitefArticlesAction(Request $request, $num)
+    {
+        $articles = $this->getDoctrine()->getManager()->getRepository(Article::class)->getPublishedBitefPageId($num, 12);
         return new JsonResponse($articles);
     }
 

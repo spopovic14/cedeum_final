@@ -1,0 +1,225 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-xs-12">
+
+            {{ page|localizePage('content')|insertImages|raw }}
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+
+            <!-- <hr class="short-line mt-18 mb-18"/> -->
+
+        </div>
+    </div>
+
+    <div id="articleLinks">
+        <articles></articles>
+    </div>
+
+{% endblock %}
+
+
+
+{% block title %}
+    {{ page|localizePage('title') }}
+{% endblock %}
+
+{% block headscripts %}
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="{{ asset('js/vue.js') }}"></script>
+{% endblock %}
+
+
+
+{% block javascripts %}
+
+<script>
+
+var projectPage = 1;
+
+var projectCard = {
+    props: ['project', 'index'],
+    template: `
+            <div v-if="project" class="row vertical-align">
+                <hr class="mt-18 mb-18 short-line">
+
+                <div class="col-md-7 activity-preview" v-bind:class="{ 'col-md-push-5': index % 2 == 0 }">
+                    <h2 class="activity-text"><a v-bind:href="getLink">
+                        <span v-if="isEnglish">^{ project.titleEn }^</span>
+                        <span v-else>^{ project.title }^</span>
+                    </a></h2>
+                </div>
+                <div class="col-md-5" v-bind:class="{ 'col-md-pull-7': index % 2 == 0 }">
+                    <img class="img-responsive center-block activity-img" v-bind:src="image">
+                </div>
+            </div>
+    `,
+    computed: {
+        isEnglish: function() {
+            return '{{ app.request.locale }}' === 'en';
+        },
+        getLink: function() {
+            var link = '{{ path('show_article', { 'id': 'proj_id' }) }}';
+            link = link.replace('proj_id', this.project.id);
+            return link;
+        },
+        image: function() {
+            var img = '{{ asset('uploads/article_pictures/^replaceThis^') }}';
+            return img.replace('^replaceThis^', this.project.picture);
+        }
+    }
+}
+
+Vue.component('articles', {
+    components: {
+        'project-card': projectCard
+    },
+    template: `
+        <div class="pt-32">
+
+            <project-card v-for="(project, index) in projects" :key="project.id" v-bind:project="project" v-bind:index="index"></project-card>
+
+            <div class="row pb-32 pt-48">
+                <div class="col-xs-12 text-center">
+                    <button class="btn btn-primary" v-on:click="prevPage">Prev</button>
+                    <button class="btn btn-primary" v-on:click="nextPage">Next</button>
+                </div>
+            </div>
+        </div>
+    `,
+    data: function() {
+        return {
+            projects: null
+        }
+    },
+    methods: {
+        loadProjects: function() {
+            var comp = this;
+            var url = '{{ path('json_bitef_article_page', { 'num': 'num_page' }) }}';
+            url = url.replace('num_page', projectPage);
+            axios.get(url)
+                .then(function(response) {
+                    if(response.data.length == 0) {
+                        projectPage = projectPage - 1;
+                        return;
+                    }
+                    comp.projects = response.data;
+
+                })
+                .catch(function(error) {
+                    alert('error ' + error);
+                })
+        },
+        nextPage: function() {
+            projectPage = projectPage + 1;
+            this.loadProjects();
+        },
+        prevPage: function() {
+            if(projectPage <= 1) {
+                return;
+            }
+            projectPage = projectPage - 1;
+            this.loadProjects();
+        }
+    },
+    mounted: function() {
+        this.loadProjects();
+    },
+    computed: {
+        isEnglish: function() {
+            return '{{ app.request.locale }}' === 'en';
+        }
+    }
+})
+
+var listItem = {
+    props: ['project'],
+    template: `
+        <h3 v-if="project">
+            <a v-bind:href="getLink">
+                <span v-if="isEnglish">^{ project.nameEn }^</span>
+                <span v-else>^{ project.name }^</span>
+            </a>
+        </h3>
+    `,
+    computed: {
+        getLink: function() {
+            var link = '{{ path('show_project', { 'id': 'proj_id' }) }}';
+            link = link.replace('proj_id', this.project.id);
+            return link;
+        },
+        isEnglish: function() {
+            return '{{ app.request.locale }}' === 'en';
+        }
+    }
+}
+
+Vue.component('project-list', {
+    components: {
+        'list-item': listItem
+    },
+    template: `
+        <div>
+            <div class="row">
+                <list-item v-for="project in projects" :key="project.id" v-bind:project="project"></list-item>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <button class="btn btn-primary" v-on:click="prevPage">Prev</button>
+                    <button class="btn btn-primary" v-on:clicl="nextPage">Next</button>
+                </div>
+            </div>
+        </div>
+    `,
+    data: function() {
+        return {
+            projects: null,
+            test: {
+                name: 'Ime projekta'
+            }
+        }
+    },
+    methods: {
+        loadProjects: function() {
+            var comp = this;
+            var url = '{{ path('json_project_page', { 'num': 'num_page' }) }}';
+            url = url.replace('num_page', projectPage);
+            axios.get(url)
+                .then(function(response) {
+                    comp.projects = response.data;
+
+                })
+                .catch(function(error) {
+                    alert('error ' + error);
+                })
+        },
+        nextPage: function() {
+            projectPage = projectPage + 1;
+            loadPage();
+        },
+        prevPage: function() {
+            projectPage = projectPage - 1;
+            loadPage();
+        }
+    },
+    mounted: function() {
+        loadProjects();
+    }
+})
+
+Vue.options.delimiters = ['^{', '}^']
+
+var app = new Vue({
+    el: '#articleLinks',
+})
+
+</script>
+
+{% endblock %}

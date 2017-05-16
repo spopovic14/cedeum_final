@@ -24,12 +24,21 @@ class DefaultController extends Controller
         // $this->getDoctrine()->getManager()->persist($article);
         // $this->getDoctrine()->getManager()->flush();
 
-        $user = new \AppBundle\Entity\User();
-        $user->setUsername('stefan');
-        $user->setPlainPassword('sifra1');
-        $user->setRoles(['ROLE_USER']);
-        $this->getDoctrine()->getManager()->persist($user);
-        $this->getDoctrine()->getManager()->flush();
+        // $pag = new \AppBundle\Entity\Page();
+        // $pag->setTitle('bitef');
+        // $pag->setTitleEn('bitef');
+        // $pag->setContent('Lorem ipsum');
+        // $pag->setContentEn('Lorem ipsum en');
+        // $pag->setRaw(false);
+        // $this->getDoctrine()->getManager()->persist($pag);
+        // $this->getDoctrine()->getManager()->flush();
+
+        // $user = new \AppBundle\Entity\User();
+        // $user->setUsername('stefan');
+        // $user->setPlainPassword('sifra1');
+        // $user->setRoles(['ROLE_USER']);
+        // $this->getDoctrine()->getManager()->persist($user);
+        // $this->getDoctrine()->getManager()->flush();
 
         // echo "saved user";die;
 
